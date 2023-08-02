@@ -12,7 +12,8 @@ def input_error(func):
             return "Invalid input."
     return wrapper
 
-class Field:
+
+class Name:
     def __init__(self, value=None):
         self.value = value
 
@@ -22,15 +23,23 @@ class Field:
     def update(self, value):
         self.value = value
 
-class Name(Field):
-    pass
+class Phone:
+    def __init__(self, value=None):
+        self.value = value
 
-class Phone(Field):
-    pass
+    def __str__(self):
+        return str(self.value)
+
+    def update(self, value):
+        if not value.isdigit():
+            raise ValueError
+        if not (7 <= len(value) <= 15):
+            raise ValueError
+        self.value = value
 
 class Record:
-    def __init__(self, name_value):
-        self.name = Name(name_value)
+    def __init__(self, name):
+        self.name = name
         self.phones = []
 
     def add_phone(self, phone_number):
@@ -68,7 +77,7 @@ contacts = AddressBook()
 
 @input_error
 def add_contact(name, phone):
-    record = Record(name)
+    record = Record(Name(name))
     record.add_phone(phone)
     contacts.add_record(record)
     return f"Contact {name} added with phone number {phone}."
