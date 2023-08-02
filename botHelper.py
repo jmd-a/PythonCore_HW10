@@ -12,9 +12,8 @@ def input_error(func):
             return "Invalid input."
     return wrapper
 
-
-class Name:
-    def __init__(self, value=None):
+class Field:
+    def __init__(self, value):
         self.value = value
 
     def __str__(self):
@@ -23,19 +22,11 @@ class Name:
     def update(self, value):
         self.value = value
 
-class Phone:
-    def __init__(self, value=None):
-        self.value = value
+class Name(Field):
+    pass
 
-    def __str__(self):
-        return str(self.value)
-
-    def update(self, value):
-        if not value.isdigit():
-            raise ValueError
-        if not (7 <= len(value) <= 15):
-            raise ValueError
-        self.value = value
+class Phone(Field):
+    pass
 
 class Record:
     def __init__(self, name):
