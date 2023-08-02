@@ -34,8 +34,7 @@ class Record:
         self.phones = []
 
     def add_phone(self, phone_number):
-        phone = Phone(phone_number)
-        self.phones.append(phone)
+        self.phones.append(phone_number)
 
     def remove_phone(self, index):
         if 0 <= index < len(self.phones):
@@ -103,8 +102,10 @@ def main():
             try:
                 name = user_input[1]
                 phone = user_input[2]
-                response = add_contact(name, phone)
-                print(response)
+                record = Record(Name(name))
+                record.add_phone(Phone(phone))
+                contacts.add_record(record)
+                print(f"Contact {name} added with phone number {phone}.")
             except IndexError:
                 print("Give me name and phone please.")
         elif command == "change":
